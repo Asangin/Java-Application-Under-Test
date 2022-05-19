@@ -1,0 +1,45 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.7'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.skryl'
+version = '0.0.1-SNAPSHOT'
+description = """build-spring-service-application"""
+sourceCompatibility = '15'
+
+repositories {
+	mavenCentral()
+}
+
+def lombokVersion = "1.18.24"
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	compileOnly "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+	testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+	testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	implementation 'org.postgresql:postgresql:42.3.3'
+//	implementation 'mysql:mysql-connector-java:8.0.29'
+
+
+	implementation 'org.springdoc:springdoc-openapi:1.6.8'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+clean.delete << file('bin')
